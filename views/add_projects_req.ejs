@@ -1,0 +1,117 @@
+<html lang="en">
+
+<head>
+    <title>project details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.5.2/flatly/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="css/projects_to_donate.css">
+    <style>
+        body {
+            background-color: #fafafa;
+        }
+
+        .container {
+            margin: 50px auto;
+            max-width: 768px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <form id="myForm" method='POST' action="/add_projects_req">
+            <div class="form-group">
+                <label for="name">Project Name: *</label><br />
+                <input  type="text" style="background-color: transparent; color:white" name="name" onblur="checkname();" id="name" class="form-control" placeholder="Name" 
+                     required>
+            </div>
+            <div class="form-group">
+                <label for="desc">Description: *</label><br />
+                <input type="text" style="background-color: transparent; color:white" name="desc" id="desc" class="form-control" placeholder="Desc" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email: *</label><br />
+                <input readonly type="email" name="email" id="email" class="form-control"
+                    placeholder="Email" style="background-color: transparent; color:white" value=<%= info.Email %> >
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone: *</label><br />
+                <input readonly type="phone" name="phone"  id="phone" class="form-control"
+                    placeholder="Phone" style="background-color: transparent; color:white" value=<%= info.MobileNo %>>
+            </div>
+            <div class="form-group">
+                <label for="amount">Amount: *</label><br />
+                <input type="text" style="background-color: transparent; color:white" name="amount" id="amount" onblur="checkamt()"  class="form-control" placeholder="Amount" required>
+            </div>
+            <div class="form-group">
+                <label for="text"> Adhaar* [xxxx xxxx xxxx]</label><br />
+                <textarea readonly rows="1" style="background-color: transparent; color:white" name="adhaar" id="adhaar" class="form-control"
+                    placeholder="Adhaar" ><%= info.Adhaar %></textarea>
+            </div>
+            <div class="form-group">
+                <label for="text">Project holder: *</label><br />
+                <input readonly type="text" style="background-color: transparent; color:white" name="projholder"  id="projholder" class="form-control"
+                    placeholder="Project Holder" value=<%= info.Name %>>
+            </div>
+            <div class="form-group">
+                <label for="text">Metamask ID: *</label><br />
+                <input type="text" style="background-color: transparent; color:white" name="bid" id="bid" class="form-control" onblur="checkmid()" placeholder="Bid" required>
+            </div>
+            <div class="form-group">
+                <label for="text">Document link: *</label><br />
+                <input type="text" style="background-color: transparent; color:white" name="link" id="link" onblur="checklink()" class="form-control" placeholder="link" required>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" name="submit" value="submit" class="btn btn-danger" />
+            </div>
+        </form>
+        <script>
+            function checkamt() {
+                e = document.getElementById("amount");
+                f = e.value;
+               
+                if (f.search(/^[1-9][0-9]{3,7}$/) !== -1) {
+                }
+                else {
+                    alert("Enter correct amount");
+                    e.value = '';
+                }
+            }
+            
+           function checkmid(){
+            e = document.getElementById("bid");
+            f=e.value;
+            if(f.search(/^0x[A-Za-z0-9]{40}$/)!==-1){
+            }
+            else{
+                alert("Enter valid metamask ID");
+                    e.value = '';   
+            }
+           }
+            function checkname() {
+                l = document.getElementById("name");
+                m = l.value;
+                if (m.search(/^[A-Za-z]+([\ A-Za-z]+)*/) !== -1 && m.length > 3) {
+                }
+                else {
+                    alert("enter correct name");
+                    l.value = '';
+                }
+
+            }
+            function checklink(){
+                if(document.getElementById('link').value=='')
+                {
+                    alert('Enter the link for your document');
+                    return false;
+                }
+                alert('Check the link once, based on your document project will be accepted or rejected');
+                return true;
+            }
+
+        </script>
+</body>
+
+</html>
